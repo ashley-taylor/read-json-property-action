@@ -1,0 +1,19 @@
+name: 'read JSON property'
+description: 'Allows you to specify a path or json string that will extract a single property from'
+branding:
+  icon: 'box'  
+  color: 'green'
+inputs:
+  path:
+    description: 'path to json file'
+  json:
+    description: 'json input'
+  property:
+    description: 'which property to read'
+    required: true
+  outputs:
+    value:
+      description: 'property'
+runs:
+  using: 'node12'
+  main: 'index.js'
