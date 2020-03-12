@@ -6,14 +6,21 @@ const core = require('@actions/core');
         const path = core.getInput('path');
         const property = core.getInput('property');
         const jsonData = core.getInput('json');
+        let json;
         if(path) {
             const data = await fs.promises.readFile(path);
-            const json = JSON.parse(data);
-            core.setOutput("value", json[property]);
+             json = JSON.parse(data);
         }else {
-            const json = JSON.parse(jsonData);
-            core.setOutput("value", json[property]);
+            json = JSON.parse(jsonData);
         }
+        const parts = property.split('.');
+
+        let toReturn = json;
+        for(const part of parts) {
+            toReturn = toReturn[part];
+        }
+        core.setOutput("value", toReturn);
+
     } catch (error) {
    		core.setFailed(error.message);
     }
