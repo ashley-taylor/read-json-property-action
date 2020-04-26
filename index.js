@@ -19,9 +19,13 @@ const core = require('@actions/core');
         for(const part of parts) {
             toReturn = toReturn[part];
         }
-        core.setOutput("value", toReturn);
+        if(toReturn === undefined) {
+            core.setFailed(`'${property}' does not exist in the provided JSON structure.`);
+        } else {
+            core.setOutput("value", toReturn);
+        }
 
     } catch (error) {
-   		core.setFailed(error.message);
+        core.setFailed(error.message);
     }
 })();
