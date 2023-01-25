@@ -3,7 +3,7 @@ import { analyzeMetafile, build } from "esbuild";
 (async () => {
   try {
     const result = await build({
-      entryPoints: ["./index.js"],
+      entryPoints: ["./index.mjs"],
       outfile: "dist/index.js",
       metafile: true,
       bundle: true,
