@@ -1,3 +1,4 @@
+// @ts-check
 const fs = require('fs');
 const core = require('@actions/core');
 
@@ -9,7 +10,7 @@ const core = require('@actions/core');
         let json;
         if(path) {
             const data = await fs.promises.readFile(path);
-             json = JSON.parse(data);
+            json = JSON.parse(Buffer.isBuffer(data) ? data.toString() : data);
         }else {
             json = JSON.parse(jsonData);
         }
