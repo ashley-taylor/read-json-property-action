@@ -1,0 +1,32 @@
+name: Action Test
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Path input
+        id: path
+        uses: ./
+        with:
+          path: ./package.json
+          property: name
+      - name: Assert path output
+        run: |
+          if [[ "${{ steps.path.outputs.value }}" != "read-json-property-action" ]] ; then
+            exit 1
+          fi
+      - name: JSON input
+        id: json
+        uses: ./
+        with:
+          json: '{"cake":"lie"}'
+          property: cake
+      - name: Assert JSON output
+        run: |
+          if [[ "${{ steps.json.outputs.value }}" != "lie" ]] ; then
+            exit 1
+          fi

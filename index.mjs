@@ -1,5 +1,6 @@
-const fs = require('fs');
-const core = require('@actions/core');
+import fs from 'node:fs/promises';
+
+import * as core from '@actions/core';
 
 (async () => {
     try {
@@ -7,10 +8,10 @@ const core = require('@actions/core');
         const property = core.getInput('property');
         const jsonData = core.getInput('json');
         let json;
-        if(path) {
-            const data = await fs.promises.readFile(path);
-             json = JSON.parse(data);
-        }else {
+        if (path) {
+            const data = await fs.readFile(path);
+            json = JSON.parse(Buffer.isBuffer(data) ? data.toString() : data);
+        } else {
             json = JSON.parse(jsonData);
         }
         const parts = property.split('.');
@@ -22,6 +23,7 @@ const core = require('@actions/core');
         core.setOutput("value", toReturn);
 
     } catch (error) {
-   		core.setFailed(error.message);
+        core.error(error.message)
+        core.setFailed(error.message);
     }
 })();
