@@ -5,7 +5,7 @@
 ```
 - name: Read Properties
   id: read_property
-  uses:  ashley-taylor/read-json-property-action@v1.0
+  uses:  ashley-taylor/read-json-property-action@v1.2
   with:
     path: options.json
     property: artifact
