@@ -15,5 +15,5 @@ outputs:
   value:
     description: 'property'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
