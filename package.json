@@ -19,6 +19,6 @@
   "homepage": "https://github.com/ashley-taylor/read-json-property-action#readme",
   "devDependencies": {
     "@actions/core": "^3.0.0",
-    "esbuild": "^0.17.4"
+    "esbuild": "^0.25.0"
   }
 }
